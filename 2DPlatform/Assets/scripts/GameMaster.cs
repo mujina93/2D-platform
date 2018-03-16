@@ -6,6 +6,11 @@ public class GameMaster : MonoBehaviour {
 
 	public static GameMaster gm;
 
+	private static int _remainingLives = 3;
+	public static int RemainingLives {
+		get { return _remainingLives; }
+	}
+
 	// by setting variables in Awake(), you are sure that they will be already set when calling any Start() method
 	void Awake(){
 		if (gm == null) {
@@ -19,6 +24,9 @@ public class GameMaster : MonoBehaviour {
 	public float spawnDelay = 4f;
 	public Transform spawnPrefab;
 	public CameraShake cameraShake;
+
+	[SerializeField]
+	private GameObject gameOverUI;
 
 	void Start(){
 		if (cameraShake == null)
@@ -37,7 +45,16 @@ public class GameMaster : MonoBehaviour {
 
 	public static void KillPlayer(Player player){
 		Destroy (player.gameObject);
-		gm.StartCoroutine(gm.RespawnPlayer ());
+		_remainingLives--;
+		if (_remainingLives <= 0) {
+			gm.EndGame ();
+		} else {
+			gm.StartCoroutine (gm.RespawnPlayer ());
+		}
+	}
+
+	public void EndGame(){
+		gameOverUI.SetActive (true);
 	}
 
 	// local method for killing the enemy
