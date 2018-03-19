@@ -414,8 +414,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f2691b290b203447a70d3da7cb28160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 5
-  damage: 5
+  fireRate: 12
+  damage: 3
   whatToHit:
     serializedVersion: 2
     m_Bits: 6148
@@ -424,9 +424,10 @@ MonoBehaviour:
   muzzleFlashPrefab: {fileID: 4214968361445274, guid: 669e07aad4660a44481f3e94ac212928,
     type: 2}
   hitPrefab: {fileID: 4059839737965918, guid: f85dced6bf674d341ba40f9cb3facd36, type: 2}
-  effectSpawnRate: 10
+  effectSpawnRate: 12
   camShakeAmt: 0.05
   camShakeLength: 0.1
+  weaponShootSound: DefaultShot
 --- !u!114 &114647759481729802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -459,6 +460,8 @@ MonoBehaviour:
   stats:
     maxHealth: 100
   fallBoundary: -20
+  deathSoundName: DeathVoice
+  gruntSoundName: Grunt
   statusIndicator: {fileID: 114010665692584018}
 --- !u!114 &114778478967360504
 MonoBehaviour:

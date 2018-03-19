@@ -36,6 +36,9 @@ public class Enemy : MonoBehaviour {
 	public float shakeAmount = 0.1f;
 	public float shakeLength = 0.1f;
 
+	// death sound name
+	public string soundDeathName = "Explosion";
+
 	// StatusIndicator is the class managing the GUI health bar
 	[Header("Optional: ")]
 	[SerializeField]

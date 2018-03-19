@@ -6,6 +6,8 @@ public class GameMaster : MonoBehaviour {
 
 	public static GameMaster gm;
 
+	[SerializeField]
+	private int maxLives = 3;
 	private static int _remainingLives = 3;
 	public static int RemainingLives {
 		get { return _remainingLives; }
@@ -24,18 +26,37 @@ public class GameMaster : MonoBehaviour {
 	public float spawnDelay = 4f;
 	public Transform spawnPrefab;
 	public CameraShake cameraShake;
+	public string respawnCountdownSoundName = "RespawnCountdown";  // this must match the name of the sound in the aduio manager! (do all from inspector)
+	public string spawnSoundName = "Spawn"; 
 
 	[SerializeField]
 	private GameObject gameOverUI;
 
+	// cache
+	private AudioManager audioManager;
+
 	void Start(){
 		if (cameraShake == null)
 			Debug.LogError ("no camera shake reference found on GM");
+		// set lives
+		_remainingLives = maxLives;
+
+		// caching audio
+		audioManager = AudioManager.instance; // sets audio manager to singleton instance of AudioManager
+		if (audioManager == null) {
+			Debug.LogError ("No audio manager found on scene");
+		}
 	}
 
 	public IEnumerator RespawnPlayer(){
-		GetComponent<AudioSource> ().Play ();
+		// play countdown sound
+		audioManager.PlaySound(respawnCountdownSoundName);
 		yield return new WaitForSeconds (spawnDelay);
+
+		// play spawn sound
+		audioManager.PlaySound(spawnSoundName);
+
+		// respawn player
 		Instantiate (playerPrefab, spawnPoint.position, spawnPoint.rotation);
 		Transform particles = Instantiate (spawnPrefab, spawnPoint.position, spawnPoint.rotation) as Transform;
 		Destroy (particles.gameObject, 3f);
@@ -59,9 +80,17 @@ public class GameMaster : MonoBehaviour {
 
 	// local method for killing the enemy
 	public void _KillEnemy(Enemy _enemy){
+		// death sound
+		audioManager.PlaySound(_enemy.soundDeathName);
+
+		// death particles
 		Transform deathParticles = Instantiate (_enemy.deathParticles, _enemy.transform.position, Quaternion.identity);
 		Destroy (deathParticles.gameObject, 5f);
+
+		// shake camera
 		cameraShake.Shake (_enemy.shakeAmount, _enemy.shakeLength);
+
+		// destroy enemy
 		if (_enemy)
 			Destroy (_enemy.gameObject);
 		else
