@@ -96,7 +96,7 @@ MonoBehaviour:
     randomPitch: 0.178
   - name: DeathVoice
     clip: {fileID: 8300000, guid: ea2433b5bd7b4b44b8529f0b127ddd88, type: 3}
-    volume: 0.499
+    volume: 0.385
     pitch: 1
     loop: 0
     randomVolume: 0
@@ -111,6 +111,34 @@ MonoBehaviour:
   - name: Spawn
     clip: {fileID: 8300000, guid: 8c41ff1d96b028143942be725067290d, type: 3}
     volume: 0.615
+    pitch: 1
+    loop: 0
+    randomVolume: 0
+    randomPitch: 0
+  - name: GameOver
+    clip: {fileID: 8300000, guid: 65e79f6750795fd418e2c522347d2d69, type: 3}
+    volume: 0.615
+    pitch: 1
+    loop: 0
+    randomVolume: 0
+    randomPitch: 0
+  - name: LandingFootsteps
+    clip: {fileID: 8300000, guid: 9b8b1bd4accb31448af684fc034d78fc, type: 3}
+    volume: 0.273
+    pitch: 1
+    loop: 0
+    randomVolume: 0
+    randomPitch: 0
+  - name: Money
+    clip: {fileID: 8300000, guid: 4888d5eadca4e2948b510053718e1635, type: 3}
+    volume: 0.61
+    pitch: 1
+    loop: 0
+    randomVolume: 0
+    randomPitch: 0
+  - name: NoMoney
+    clip: {fileID: 8300000, guid: 202a6a4bf97fd5e46a841d5ca53d9529, type: 3}
+    volume: 0.62
     pitch: 1
     loop: 0
     randomVolume: 0

@@ -70,10 +70,9 @@ public class AudioManager : MonoBehaviour {
 			if (sounds [i].name == _name) {
 				sounds [i].Play (); // play found sounds
 				return;
-			} else {
-				Debug.LogWarning ("AudioManager: sound not found in list: " + _name);
 			}
 		}
+		Debug.LogWarning ("AudioManager: sound not found in list: " + _name);
 	}
 
 	// function that stops playing

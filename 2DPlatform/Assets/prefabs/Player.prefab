@@ -256,7 +256,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1041936105205900}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.26, y: 1.61, z: 0}
+  m_LocalPosition: {x: -0.05, y: 1.619, z: 0}
   m_LocalScale: {x: 1.7715329, y: 1.7715304, z: 1}
   m_Children:
   - {fileID: 4173614728796148}
@@ -446,6 +446,7 @@ MonoBehaviour:
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 4294967295
+  landingSoundName: LandingFootsteps
 --- !u!114 &114692193255429184
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -457,8 +458,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d1fcc2d69317cf468f4261a5cd41a06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats:
-    maxHealth: 100
   fallBoundary: -20
   deathSoundName: DeathVoice
   gruntSoundName: Grunt

@@ -2,18 +2,18 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Text))]
-public class LivesCounterUI : MonoBehaviour {
+public class MoneyCounterUI : MonoBehaviour {
 
 	[SerializeField]
-	private Text livesText;
+	private Text moneyText;
 
 	// Use this for initialization
 	void Awake () {
-		livesText = GetComponent<Text> ();
+		moneyText = GetComponent<Text> ();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		livesText.text = "Lives: " +GameMaster.RemainingLives.ToString();
+		moneyText.text = "Money: " +GameMaster.Money.ToString();
 	}
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(EnemyAI))] // to be toggled on off
 public class Enemy : MonoBehaviour {
 
 	[System.Serializable]
@@ -39,6 +40,8 @@ public class Enemy : MonoBehaviour {
 	// death sound name
 	public string soundDeathName = "Explosion";
 
+	public int moneyDrop = 10;
+
 	// StatusIndicator is the class managing the GUI health bar
 	[Header("Optional: ")]
 	[SerializeField]
@@ -47,7 +50,7 @@ public class Enemy : MonoBehaviour {
 	// call Init() on EnemyStats object, which
 	// initializes the values for its stats
 	void Start()
-	{
+	{	
 		stats.Init();
 		// every time health is set, call statusIndicator.SetHealth
 		// to update the GUI
@@ -55,6 +58,9 @@ public class Enemy : MonoBehaviour {
 			statusIndicator.SetHealth(stats.currentHealth, stats.maxHealth);
 		if (deathParticles == null)
 			Debug.LogError ("No death particles reference on enemy");
+
+		// subscribe to the Upgrade Menu
+		GameMaster.gm.onToggleUpgradeMenu += OnUpgradeMenuToggle;
 	}
 
 	public void DamageEnemy(int damage){
@@ -78,5 +84,16 @@ public class Enemy : MonoBehaviour {
 			_player.DamagePlayer (stats.damage);
 			DamageEnemy (999999); // suicide
 		}
+	}
+
+	// callback called when upgrade menu is toggled
+	void OnUpgradeMenuToggle(bool active){
+		// toggles AI on/off when upgrade menu is off/on
+		GetComponent<EnemyAI>().enabled = !active;
+	}
+
+	void OnDestroy(){
+		// UNsubscribe from upgrade menu when dying
+		GameMaster.gm.onToggleUpgradeMenu -= OnUpgradeMenuToggle;
 	}
 }
